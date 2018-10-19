@@ -1,7 +1,6 @@
 ---
 layout: post
-title: First Blog
-tags: [A Tag, Test, Lorem, Ipsum]
+title: Redis
 ---
 
 ## 만나서 반갑습니다 윤혜린입니다.
