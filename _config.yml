@@ -9,20 +9,20 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "ko"
-title                    : "Kyoung99u"
+title                    : "rin gu"
 title_separator          : "-"
-name                     : "Bokyoung Han"
-description              : "One must live the way one thinks or end up thinking the way one has lived"
-url                      : "https://bokyounghan.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : "Healin Yoon"
+description              : "..."
+url                      : "https://yoonhealin.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : "bokyounghan/bokyounghan.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "YoonHeaLin/YoonHeaLin.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
   disqus:
-    shortname            : Kyoung-99u-blog
+    shortname            : rin-gu-blog
   discourse:
     server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
   facebook:
@@ -64,7 +64,7 @@ naver_site_verification  :
 twitter:
   username               :
 facebook:
-  username               : 
+  username               :
   app_id                 :
   publisher              :
 og_image                 : "/assets/images/teaser.png" # Open Graph/Twitter default site image
@@ -84,11 +84,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Bokyoung Han"
+  name             : "HeaLin Yoon"
   avatar           : "/assets/images/profile.png"
-  bio              : "student in CSEE"
-  location         : "HGU"
-  email            : "150224@naver.com"
+  bio              : "Software Engineer"
+  location         : "Suwon"
+  email            : "healin23@gmail.com"
   uri              :
   home             : "#" # null (default), "absolute or relative url to link to author home"
   bitbucket        :
@@ -97,11 +97,11 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "bokyounghan"
+  github           : "YoonHeaLin"
   gitlab           :
   google_plus      :
   keybase          :
-  instagram        : 
+  instagram        :
   lastfm           :
   linkedin         : # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
   pinterest        :
