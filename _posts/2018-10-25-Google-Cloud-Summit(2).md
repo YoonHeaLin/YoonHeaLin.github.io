@@ -12,7 +12,7 @@ category: seminar
 
 Google Cloud Summit 세미나 참석
 
-======
+___
 # 빅데이터와 데이터 분석 소개
 ---
 
