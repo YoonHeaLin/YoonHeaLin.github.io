@@ -1,6 +1,6 @@
 ---
 
-title : "Google Cloud Summit(데이터를 활용한 머신러닝과 IoT)"
+title : "Google Cloud Summit(2)-데이터를 활용한 머신러닝과 IoT"
 date : 2018-10-25 10:00:00 + 0000
 tags: seminar
 category: seminar
