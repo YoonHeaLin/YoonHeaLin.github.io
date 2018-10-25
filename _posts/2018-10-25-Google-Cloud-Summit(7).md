@@ -84,3 +84,22 @@ Cloud Video Intelligence API는 다음과 같은 서비스를 제공한다.
 -비디오에서 라벨, 타임 스챔프 등의 엔티티 식별
 
 Cloud Video Intelligence API 데모 영상은 아래에서 볼 수 있다.
+
+(영상)
+
+## 요약
+
+(사진)
+
+## 구글 클라우드 교육
+구글에서 제공하는 강좌를 소개한다.
+
+**Coursera**
+https://www.cou...
+
+**추천 강좌**
+Architecture with Google Cloud Platform Specialization
+
+Data Enginnering on Google Cloud Platform Specialization
+
+Machine Learning with Tensorflow on Google Cloud Platform Specialization
