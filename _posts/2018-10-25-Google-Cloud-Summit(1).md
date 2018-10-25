@@ -1,6 +1,6 @@
 ---
 
-title : "Google Cloud Summit(1)"
+title : "Google Cloud Summit 키노트"
 date : 2018-10-25 10:00:00 + 0000
 tags: seminar
 category: seminar
