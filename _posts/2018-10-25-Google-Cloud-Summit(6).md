@@ -1,6 +1,6 @@
 ---
 
-title : "Google Cloud Summit 데이터를 활용한 머신러닝과 IoT(5)-데이터 사이언티스트를 위한 Cloud AI Platform 소개"
+title : "Google Cloud Summit 데이터를 활용한 머신러닝과 IoT(6)-비즈니스를 위한 간편한 머신러닝"
 date : 2018-10-25 10:00:00 + 0000
 tags: seminar
 category: seminar
@@ -13,64 +13,93 @@ category: seminar
 Google Cloud Summit 세미나 참석
 
 ---
-# 데이터 사이언티스트를 위한 Cloud AI Platform 소개
+# 비즈니스를 위한 간편한 머신러닝
 ---
+이 세션에서는 비즈니스를 위한 간편한 머신러닝을 다룬다. 비기술자가 아닌 사람들을 대상으로하는 서비스를 소개하는만큼, 머신러닝에 대해 매우 쉽고 차근차근 설명하는 것이 인상적이었다.
 
-## Cloud AI 개요
-"Google은 모든 사람이 사용할 수 있도록 AI를 민주화 합니다."
-
-(사진)
-
-민주화의 의미는 보유한 AI 기술 레벨에 따라 서비스를 제공함을 의미한다. 각각의 레벨 중 어느 레벨에 속해있는 지에 따라 솔루션, 빌딩 블록, 플랫폼 등으로 답변이 다르며, End to End로 제공되는 서비스는 다음과 같다.
-
-(사진)
-
-## 데이터에서 AI를 얻기 까지
-
-AI 수명 주기에 맞는 데이커 기반 기술이 필요하다. **모든 규모에서 데이터 수집**, **안정적인 스트리밍 데이터 파이프라인**, **데이터 웨어하우징 및 데이터 레이크**, **고급분석** 각각의 단계가 모두 잘 이루어져야 하는데 구글은 각 단계를 위한 서비스를 서버리스 형태로 제공한다. 이 세션에서는 각각의 솔루션이 제공하는 세부 서비스에 대해 설명하였다.
-
-<Cloud DataPrep>
-
-(사진 없음)
-
-<Data Studio>
-
-(사진)
-
-<BigQuery ML>
-"데이터가 있는 곳에  ML을 넣자"는 컨셉으로 매우 심플하게 학습과 분석이 가능하다. BigQuery ML은 데이터 분석가와 데이터 사이언티스트의 역량을 강화하며, 강점은 다음과 같다. 첫쨰, 데이터를 이동하지 않고 계획된 ML을 실행한다. 둘째, 모델 선택 및 하이퍼튜닝을 자동화한다. 셋째, BigQuery의 SQL로 모델 튜닝을 반족하여 개발 속도를 향상할 수 있다.
-
-<Cloud AI 솔루션>
-구글 AI 전문성 + 기업 데이터 및 워크플로 = 강력한 사용자 지정 솔루션
-
-"Contact Center AI" 솔루션 소개
-> Contact Center AI를 통해 기업은 깊이 있는 AI 전문성이 없어도 AI를 사용하여 자사 컨탣 센터를 새건하고 향상 할 수 있다.
-
-<완전한 AI Life Cycle을 위한 서버리스 모델>
-
-(사진)
-
-하나의 머신러닝 엔진으로 솔루션을 제공한다.
-
-<클라우드 ML 엔진>
-통합된 노트북 경험으로 완벽하게 괸리되는 서비스를 제공하며, 다중 프레임쿼크(사진 아래에 있음)를 제공한다. 훈련 측면에서 모델 아키텍처 설계 및 평가와 관리형 틀러스터에서 모든 모델을 대규모로 훈련할 수 있도로 지원한다. ....
-
-(사진)
-
-<HyperTune으로 모델 최적화 가속>
-하이퍼 파라미터란?
-자동으로 하이퍼 파라미터 튜닝 서비스를 제공한다. 이는 Running rate 값의 범위 지정만 해 놓으면 스스로 iteration을 하면서 어떤 값을 했을 때 학습 결과가 가장 좋은지 스스로 튜닝하는 서비스를 제공하는 것을 의미한다. 이를 통해 (사진애 글)
-
-<KubeFlow>
-Kubernetes용 클라우드 네이티브 ML이다. 강점은 첫째, 시작하기 쉽다. 최고의 프레임워크를 즉시 사용할 수 있도록 지원하며, Kubernetes가 종속성, 리소스를 관리한다. 둘째, 스왑 및 확장이 가능하다. ML 라이브러리, CPU, GPU, TPU 등이 가능하며, 대규모도 가능하다. 셋째, 원하는 곳에서 실행이 가능하다. GCP, 온프레이스
-
-## 고객 사용 사례(넷마블)
+## 머신러닝이란?
 
 (영상)
 
-## 정리
+tensorflow playground에 접속하면 test를 편리하게 시도해 볼 수 있다.
 
-(사진에 글)
-1. 사용자가 **데이터에서 통찰력과 AI** 를 원활하게 얻을 수 있도록 지원
-2. **모두가 AI를 사용** 할 수 있도록 지원하는 도구와 서비스 구축
-3. 
+## 비즈니스 상화: 전문성 부족
+이번 Google Cloud Summit의 컨셉을 "AI 민주화"로 제대로 잡은 것 같다. 아래의 사진은 사용자에 따라 제공되는 구글 클라우드 서비스인데, "Machine Learning API"는 비즈니스 맨들을 대상으로 서비스를 제공한다. **Machine Learning API는 Training을 할 필요가 없다!**
+
+(사진)
+
+## API를 활용한 머신러닝
+>단일 REST API요청으로 사전에 학습된 모델 사용
+
+### 1. 비정형 데이터 분석을 위한 API 제공
+비정형 데이터란 오디오, 이미지, 비디오, 텍스트 등을 포함한다. 비정형 데이터는 분석이 상당히 까다로우며, 데이터 사이즈가 (비디오와 같은 경우) 매우 크다. 구글은 사전 학습된 모델을 사용하여 일반적인 ML 학습을 수행하도록 지원한다.
+
+**<Cloud Vision API>**
+구글에서 제공하는 ML 모델 솔루션으로, 다음과 같은 서비스를 제공한다.
+- 레이블 및 웹 감지
+- OCR
+- 로고 감지
+- 랜드마크 감지
+- 자르기 힌트
+- 콘텐츠 감지
+
+Cloud Vision API 데모 영상은 아래에서 볼 수 있다. 영상에 앞서, 다음과 같은 프로세스가 동작하는 것을 참고하면 도움이 될 것이다.
+
+(사진)
+(영상)
+
+참고로 파이썬에서도 호출 가능하다.
+
+**<Cloud Translation API>**
+이번 단락에서는 Translation API를 사용한 삼성전자의 사례("Translate with S Pen")를 소개한다. Translate with S Pen은 화면상의 단어나 문장을 인식해서 번역해주는 기능을 제공한다.
+
+구글 클라우드를 선택한 이유
+(구글 클라우두 번역 API의 좋은점 사진)
+- Larency: Translate with S Pen 서비스를 제공하게 위해서는 on-device 솔루션과 같이 빠른 응답이 중요
+- Accuracy: 좋은 성능의 번역 엔진, 러닝 투 러닝
+- Supports: 100여개의 언어 지원, 자동 언어 감지 기능 제공
+- Simple Integraion: REST API 제공
+
+**<Cloud Natural Language API>**
+Netural Language API는 다음과 같은 서비스를 제공한다.
+- 엔터티 추출
+- 감정감지
+- 구문 분석
+- 콘텐츠 분류
+
+Cloud Natural Language API 데모 영상은 아래에서 볼 수 있다.
+
+(영상)
+
+**<Cloud speech to text & text to speech API>**
+Cloud speech to text & text to speech API 다음과 같은 서비스를 제공한다.
+- STT
+- TTS
+- 자동언어감지
+- 실시간 분석 지원
+- 100개 이상의 언어 지원
+
+**<Cloud Video Intelligence API>**
+Cloud Video Intelligence API는 다음과 같은 서비스를 제공한다.
+-비디오에서 라벨, 타임 스챔프 등의 엔티티 식별
+
+Cloud Video Intelligence API 데모 영상은 아래에서 볼 수 있다.
+
+(영상)
+
+## 요약
+
+(사진)
+
+## 구글 클라우드 교육
+구글에서 제공하는 강좌를 소개한다.
+
+**Coursera**
+https://www.cou...
+
+**추천 강좌**
+Architecture with Google Cloud Platform Specialization
+
+Data Enginnering on Google Cloud Platform Specialization
+
+Machine Learning with Tensorflow on Google Cloud Platform Specialization
