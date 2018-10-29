@@ -19,7 +19,7 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 "기업과 개발자들이 쉽게 접근해 빠르고 유용하게 AI를 사용할 수 있게 하겠다."
 
 ## AI를 도입하기 위해서는..
-AI를 도입하는 것이 어려운 이유는 많은 부분이 갖추어져야 실질적인 효과를 볼 수 있기 때문이다. 그렇다면 어떤 조건들이 필요할까?
+AI를 도입하는 것이 어려운 이유는 많은 조건이 갖추어져야 실질적인 효과를 볼 수 있기 때문이다.
 1. Infrasrructure at Massive Scale
 Chips(CPUs, GPUs, TPUs), Enginds Storage, Network, Replication
 2. Security
@@ -34,16 +34,10 @@ AI 도입을 위한 조건들을 고려했을 때, Google Cloud AI Platform이 �
 
 (사진-Google Cloud AI Platform)
 
-TPU
-
-2. Security
-3. Data
-4. Models
-
-## 어떤 종류의  ML 문제를 해결하기 원하는가
-개냐 고양이냐? 라면 오픈소스로 가능하지만, 고양이의 이름이 뭐냐라고 한다면, 직접 모델을 만들어야 한다.
-
 ### Google 비전 API 데모
+
+(영상)
+
 구글 클라우드 사이트에서 직접 test 가능
 - Drag & Drop으로 test 가능
 - 일반적인 정보는 API를 호출하는 것 만으로도 충분
