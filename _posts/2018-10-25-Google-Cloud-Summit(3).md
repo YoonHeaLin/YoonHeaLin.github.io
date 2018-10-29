@@ -9,10 +9,9 @@ category: seminar
 
 # Intro
 ---
+Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝과 IoT" Track을 참관하였고, 총 6번에 나누어 진행된 각 세션의 내용을 공유하고자 한다. 이번 포스트에서는 **"데이터를 활용한 머신러닝과 IoT(3)-데이터 사이언스 전문 지식 없이 Cloud AutoML속으로 깊이 들어가보기"** 발표 내용을 정리하였다.
 
-Google Cloud Summit 세미나 참석
 
----
 # 데이터 사이언스 전문 지식 없이 Cloud AutoML속으로 깊이 들어가보기
 ---
 
@@ -20,12 +19,20 @@ Google Cloud Summit 세미나 참석
 "기업과 개발자들이 쉽게 접근해 빠르고 유용하게 AI를 사용할 수 있게 하겠다."
 
 ## AI를 도입하기 위해서는..
+AI를 도입하는 것이 어려운 이유는 많은 부분이 갖추어져야 실질적인 효과를 볼 수 있기 때문이다. 그렇다면 어떤 조건들이 필요할까?
 1. Infrasrructure at Massive Scale
-전체 internet traffic의 40%를 차지
+Chips(CPUs, GPUs, TPUs), Enginds Storage, Network, Replication
+2. Security
+Software, Data, Hardware
+3. Data
+User data, Application data, Usage data, Batch, Streaming, Structured, Unstructured
+4. Models
+DNNs, CNNs, RNNs,... for vision, speech, language, video,...
 
-인프라가 중요한 이유
+## Google Cloud AI Platform
+AI 도입을 위한 조건들을 고려했을 때, Google Cloud AI Platform이 제공하는 서비스가 얼마나 강력한지를 짐작할 수 있다.
 
-"모든 사람들이 동시에 자신의 폰에 3분간 이야기 한다면..."
+(사진-Google Cloud AI Platform)
 
 TPU
 
