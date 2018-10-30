@@ -9,6 +9,7 @@ category: Cloud Computing
 
 # Intro
 ---
+이 포스트에서는 클라우드 컴퓨팅의 정의와 장점에 대해서 설명하고, 클라우드 컴퓨팅과 관련된 기본 용어를 정리하였다.
 
 # 클라우드 컴퓨팅(Cloud Computing)이란?
 ---
