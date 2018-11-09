@@ -24,41 +24,40 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 ### 2. 데이터가 많더라도 학습할 수 있는 컴퓨팅 리소스 부재
 ### 3. 전문가의 부족
 
-![Complex&TimeIntensive](/assets/images/2018-10-25-Google-Cloud-Summit/2/1.png)
-
-(사진-It's Complex & Time Intensive)
+![Complex & Time Intensive](/assets/images/2018-10-25-Google-Cloud-Summit/2/1.png){: width="640" height="500"}
 
 그러나 최근 수많은 데이터를 모으고 정제하는 OSS/CS가 등장하고, GPU 등의 등장으로 컴퓨팅 파워가 강력한 환경이 제공되면서 사실상 첫 번쨰와 두 번째 문제는 거의 해결되었다고 볼 수 있다. 따라서 남은 문제는 "전문가의 부족"이다.
 
-(사진- TPU)
-(사진- 동그라미 차트)
+![TPU](/assets/images/2018-10-25-Google-Cloud-Summit/2/2.png){: width="640" height="500"}
+![Chart](/assets/images/2018-10-25-Google-Cloud-Summit/2/3.png){: width="640" height="500"}
+
 
 ***
 
 ## Ⅱ 그래서 Cloud AutoML
 그래서 구글은 Cloud AutoML을 해결 방안으로 제시한다. 구글의 AutoML은 또 하나의 Cloud Service로, 머신 러닝을 as a service로 제공하는 형태이다. 전통적인 머신러닝 workflow와 구글의 AutoML workflow를 아래의 사진에서 비교하였다.
 
-(사진-Traditional ML Workflow)
-(사진-AutoML Workflow)
+![Traditional ML Workflow](/assets/images/2018-10-25-Google-Cloud-Summit/2/4.png){: width="640" height="500"}
+![AutoML Workflow](/assets/images/2018-10-25-Google-Cloud-Summit/2/5.png){: width="640" height="500"}
 
 구글의 AutoML은 전통적인 ML workflow의 복잡한 단계를 AutoML을 통해 제공하므로, ML 전문가가 아니더라도 빅데이터를 정제하고, 데이터를 학습하고, 의미있는 결과를 도출하고, 이를 분석할 수 있게 한다.
 
-(사진-Cloud AutoML)  
+![Cloud AutoML](/assets/images/2018-10-25-Google-Cloud-Summit/2/6.png){: width="640" height="500"}
 
 ***
 
 ## Ⅲ AutoML 비즈니스 적용 사례
 그렇다면, AutoML을 비즈니스에 어떻게 적용할 수 있을까? 발표자는 **"사용자들이 원하는 장면으로 갈 수 있는 영상 검색 서비스"** 를 제공하는 비즈니스를 사례로 들었다.
 
-(사진-사용자들이 원하는 장면으로 갈 수 있는 영상검색 서비스)
+![영상 검색 서비스1](/assets/images/2018-10-25-Google-Cloud-Summit/2/7.png){: width="640" height="500"}
 
 사용자들이 원하는 장면으로 갈 수 있는 영상 검색 서비스 구축을 위해서 사용된 플랫폼은 **Cloud AutoML Vision** 이다.
 
-(사진-영상검색서비스)
+![영상 검색 서비스2](/assets/images/2018-10-25-Google-Cloud-Summit/2/8.png){: width="640" height="500"}
 
 Cloud AutoML Vision을 통해 비즈니스를 하는 기업은 다음과 같은 서비스를 제공할 수 있다.
 
-(사진-영상검색서비스)
+![영상 검색 서비스3](/assets/images/2018-10-25-Google-Cloud-Summit/2/9.png){: width="640" height="500"}
 
 ***
 
