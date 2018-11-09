@@ -37,8 +37,8 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 ## Ⅱ 서버리스 데이터 분석
 통찰력을 얻기 위한 인프라부터 플랫폼까지
 
-![서버리스데이터분석](assets/images/2018-10-25-Google-Cloud-Summit/1/1.png)
-![전체ML수명주기를위한서버리스분석](assets/images/2018-10-25-Google-Cloud-Summit/1/2.png)
+![서버리스데이터분석](/assets/images/2018-10-25-Google-Cloud-Summit/1/1.png)
+![전체ML수명주기를위한서버리스분석](/assets/images/2018-10-25-Google-Cloud-Summit/1/2.png)
 
 ***
 
@@ -65,8 +65,8 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 
 ### 2. 위메프 적용 사례
 
-![리테일](assets/images/2018-10-25-Google-Cloud-Summit/1/3.png)
-![빅쿼리도입계기](assets/images/2018-10-25-Google-Cloud-Summit/1/4.png)
+![리테일](/assets/images/2018-10-25-Google-Cloud-Summit/1/3.png)
+![빅쿼리도입계기](/assets/images/2018-10-25-Google-Cloud-Summit/1/4.png)
 
 #### < 빅쿼리 도입 이전 >
 위메프는 "기획 의도 대로 사용자가 사용하고 있는가", "위메프 지면들을 사업부 및 컴텐츠가 돈을 잘 벌고 사용하고 있는가" 등의 정보가 필요했으나 BigQeury 도입 이전에는 다음과 같은 이유로 어려움을 겪었다.
@@ -77,7 +77,7 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 
 #### < 빅쿼리 도입 이후 >
 
-![빅데이터분석융합](assets/images/2018-10-25-Google-Cloud-Summit/1/5.png)
+![빅데이터분석융합](/assets/images/2018-10-25-Google-Cloud-Summit/1/5.png)
 
 MySQL과 Embulk를 BigQuery에 적재하고 Google Analytics로 분석하게 했다. 이를 통해 개선된 사항은 다음과 같다.
 - 시간대별 위메프 운영 실적
@@ -95,8 +95,8 @@ MySQL과 Embulk를 BigQuery에 적재하고 Google Analytics로 분석하게 했
 ## Ⅴ 정리
 구글에서 Cloud에서 제공하는 빅데이터 분석 서비스는 "전체 데이터 수명 주기에 걸친 서버리스 플랫폼 및 자동으로 최적화된 사용"을 목표로 한다. 전체 Flow를 정리하면 다음과 같다.
 
-![이미사용하던도구와연결](assets/images/2018-10-25-Google-Cloud-Summit/1/6.png)
-![전체데이터수명주기에걸친서버리스플랫폼및자동으로최적화](assets/images/2018-10-25-Google-Cloud-Summit/1/7.png)
+![이미사용하던도구와연결](/assets/images/2018-10-25-Google-Cloud-Summit/1/6.png)
+![전체데이터수명주기에걸친서버리스플랫폼및자동으로최적화](/assets/images/2018-10-25-Google-Cloud-Summit/1/7.png)
 
 ### 1. 수집
 - 고객의 앱/서버에서 제공되는 로그는 Cloud pub/sub으로 유입 가능
