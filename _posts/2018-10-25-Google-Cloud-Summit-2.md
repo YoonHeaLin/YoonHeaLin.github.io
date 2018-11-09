@@ -24,6 +24,8 @@ Google Cloud Summit 2018에 다녀왔다. "데이터를 활용한 머신러닝�
 ### 2. 데이터가 많더라도 학습할 수 있는 컴퓨팅 리소스 부재
 ### 3. 전문가의 부족
 
+![Complex&TimeIntensive](/assets/images/2018-10-25-Google-Cloud-Summit/2/1.png)
+
 (사진-It's Complex & Time Intensive)
 
 그러나 최근 수많은 데이터를 모으고 정제하는 OSS/CS가 등장하고, GPU 등의 등장으로 컴퓨팅 파워가 강력한 환경이 제공되면서 사실상 첫 번쨰와 두 번째 문제는 거의 해결되었다고 볼 수 있다. 따라서 남은 문제는 "전문가의 부족"이다.
