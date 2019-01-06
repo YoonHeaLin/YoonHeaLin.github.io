@@ -2,8 +2,8 @@
 
 title : "Google Cloud Summit 데이터를 활용한 머신러닝과 IoT(3)-데이터 사이언스 전문 지식 없이 Cloud AutoML속으로 깊이 들어가보기"
 date : 2018-10-25 10:00:00 + 0000
-tags: seminar
-category: seminar
+tags: Seminar
+category: Seminar
 
 ---
 

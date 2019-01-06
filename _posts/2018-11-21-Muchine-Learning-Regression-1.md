@@ -3,7 +3,7 @@
 title : "Muchine Learning 알고리즘 - Linear Regression(선형 회귀 분석)"
 date : 2018-11-27 10:00:00 + 0000
 tags: Muchine_Learning
-category: Muchine Learning
+category: Muchine-Learning
 
 ---
 

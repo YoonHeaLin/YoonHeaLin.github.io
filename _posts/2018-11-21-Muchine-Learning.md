@@ -3,7 +3,7 @@
 title : "Muchine Learning의 종류"
 date : 2018-11-21 10:00:00 + 0000
 tags: Muchine_Learning
-category: Muchine Learning
+category: Muchine-Learning
 
 ---
 
