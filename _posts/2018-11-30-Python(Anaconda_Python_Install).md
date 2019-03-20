@@ -2,7 +2,7 @@
 
 title : "우분투(Ubuntu) 16.04에 아나콘다(Anaconda) 설치하기 / 주피터 노트북(Jupyter Notebook) 시작하기"
 date : 2018-11-30 10:00:00 + 0000
-tags: Python
+tags: Python, Anaconda, Jupyter
 category: Python
 
 ---
