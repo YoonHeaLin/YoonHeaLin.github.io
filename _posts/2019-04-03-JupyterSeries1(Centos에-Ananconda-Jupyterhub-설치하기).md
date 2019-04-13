@@ -13,7 +13,7 @@ category: Tool
 ***
 
 # 1. 사전 작업: jupyter user 계정 생성
-jupyter user의 home 디렉토리에서 작업하기 위해서, 먼저 jupyter user 계정을 생성하자.
+여기서는 Jupyterhub를 운영을 편리하게 하기 위해서 jupyter 계정을 별도로 생성한다. Jupyterhub를 구축하고 나면 userdata 디렉토리를 설정하게 되는데, 이때 jupyter 계정의 home 디렉토리의 하위 디렉토리로 설정할 것이다. 먼저 jupyter user 계정을 생성하자.
 
 ```bash
 useradd jupyter # jupyter user 생성
@@ -23,7 +23,7 @@ passwd jupyter  # jupyter user 패스워드 설정
 ***
 
 # 2. Anaconda 설치
-먼저 anaconda 디렉토리를 생성하는 것을 추천한다.
+먼저 jupyter 계정의 home 디렉토리 경로에 anaconda 디렉토리를 생성하고, 해당 경로에 ananconda를 설치하도록 한다.
 ```
 mkdir /home/jupyter/anaconda
 ```
@@ -32,20 +32,22 @@ mkdir /home/jupyter/anaconda
 Anaconda 설치 파일을 다운로드 해야 하는데, 최신 버전은 [여기서](https://repo.continuum.io/archive/) 확인할 수 있다.
 
 
-링크 주소를 복사해서 /home/jupyter/anaconda 경로에서 다음 명령으로 다운로드 하면 된다.
+위에서 ananconda 설치파일 다운로드 링크 주소를 복사해서 다음 명령으로 다운로드 하면 된다.
 ```
+cd /home/jupyter/anaconda
+
 wget {링크 주소}
 ex) wget  https://repo.continuum.io/archive/Anaconda2-5.3.1-Linux-x86_64.sh
 ```
 
 ## 2-2. Anaconda 설치
-다운로드한 설치 파일을 실행 가능하도록 권한을 변경해주고,
+먼저 다운로드한 설치 파일을 실행 가능하도록 권한을 변경해줘야 한다.
 ```
 chmod +x {설치 파일}
 ex) chmod +x Anaconda2-5.3.1-Linux-x86_64.sh
 ```
 
-설치하면 된다. 이떄, 특정 디렉토리에 설치가 가능하다. 여기서는 jupyter의 home 디렉토리에 설치했다.
+그리고 다음과 같이 설치를 진행하면 된다. 이때, 매개변수를 명령어에 추가하여 특정 디렉토리에 설치가 가능하다. 여기서는 /home/jupyter/anaconda/ 경로에 설치했다.
 ```
  ./Anaconda2-5.3.1-Linux-x86_64.sh
 
@@ -54,19 +56,19 @@ ex) chmod +x Anaconda2-5.3.1-Linux-x86_64.sh
 ex) ./Anaconda2-5.3.1-Linux-x86_64.sh -b -p /home/jupyter/anaconda -f
 ```
 
-마지막으로 환경 변수를 설정해줘야 한다. /etc/profile 파일을 열어서,
+마지막으로 anaconda 사용을 위해 환경 변수를 설정해줘야 한다. /etc/profile 파일을 열어서 해당 path를 추가하자.
 ```
 vi /etc/profile
-```
 
-아래의 내용을 추가하고,
-```
+# 아래의 PATH 추가
 export PATH=$PATH:/home/jupyter/anaconda/bin
 ```
+
 ![JupyterSeries1-(1)](/assets/images/2019-04-13-JupyterSeries1/1.png){: width="900" height="700"}
 
-적용하면 끝난다.
+마지막으로 환경 변수 변경을 적용해주면 anaconda 설치가 완료된다.
 ```
+# 환경 변수 적용
 source /etc/profile
 ```
 
@@ -88,15 +90,17 @@ ex) source activate jupyterhub
 
 # 가상환경 나가기
 source deactivate
+```
 
+생성된 가상환경의 목록은 아래의 명령어로 조회할 수 있다. Jupyterhub 가상환경이 생성된 것을 확인해보자.
+```
 # 가상환경 리스트 확인
 conda info --envs
 ```
 
 ## 3-2. Npm, Node js, Proxy 설치
 Jupyterhub를 설치하기 위해서는 npm, node js, configurable http proxy 설치가 필요하다.
-
-다음 명령으로 npm과 node js를 설치하고,
+아래의 명령어를 차례로 입력하여 설치를 진행하면 된다.
 ```
 # 설치
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
@@ -105,23 +109,21 @@ sudo yum install nodejs
 # 버전 확인
 node --version
 npm --version
-```
 
-configurable http proxy도 설치한다.
-```
+# configurable http proxy 설치
 sudo npm install -g configurable-http-proxy
 ```
 
 ## 3-3. Jupyterhub 설치 및 시작
 Jupyterhub를 설치하는 명령은 간단하다.
 ```
-# 먼저 가상환경에 들어가서
+# 먼저 Jupyterhub 가상환경에 들어가서
 source activate Jupyterhub
 
-# 설치해주면 끝!
+# pip로 설치해주면 끝!
 pip install Jupyterhub
 
-# 설치 확인
+# JUpyterhub 설치 확인
 jupyterhub -h
 ```
 
@@ -134,6 +136,7 @@ jupyterhub
 ```
 
 http://localhost:8000 주소로 접속하면 Jupyterhub에 로그인할 수 있다.
+
 ![JupyterSeries1-(2)](/assets/images/2019-04-13-JupyterSeries1/2.png){: width="900" height="700"}
 
 > PAM 로그인
