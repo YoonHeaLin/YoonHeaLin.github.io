@@ -102,25 +102,24 @@ runtime:
     /home/jupyter/.local/share/jupyter/runtime
 ```
 
-우리는 여기서 /home/jupyter/anaconda/share/jupyter/ 경로를 사용하여 kernel을 등록할 것이다.
+이 포스트에서는 /usr/local/share/jupyter/ 경로를 사용하여 kernel을 등록할 것이다.
 
 이제 마지막으로 Tensorflow 가상환경을 Jupyterhub kernel에 추가해주자.
-
-먼저 Jupyter kernel 경로(/home/jupyter/anaconda/share/jupyter/kernels)에 새로 등록할 tensorflow 디렉토리를 추가해주어야 한다.
+먼저 Jupyter kernel 경로(/usr/local/share/jupyter/kernels)에 새로 등록할 tensorflow 디렉토리를 추가해주어야 한다.
 
 ```
 # tensorflow 디렉토리 추가
-mkdir /home/jupyter/anaconda/share/jupyter/kernels/tensorflow
+mkdir /usr/local/share/jupyter/kernels/tensorflow
 ```
 
 그리고 위의 경로에 kernel.json 파일을 생성하고, 아래와 같이 설정을 입력하고 저장해준다. 이때 가상환경이 설치된 경로에 맞게 입력하도록 주의해야 한다.
 
 ```
-vi /home/jupyter/anaconda/share/jupyter/kernels/tensorflow/kernel.json
+vi /usr/local/share/jupyter/kernels/tensorflow/kernel.json
 
 # 아래 설정 입력(경로에 맞게 적절하게 수정해주어 한다)
 {
- "argv": [ "/data/anaconda/envs/tensorflow/bin/python", "-m", "ipykernel",
+ "argv": [ "/home/jupyter/anaconda/envs/tensorflow/bin/python", "-m", "ipykernel",
           "-f", "{connection_file}"],
  "display_name": "tensorflow",
  "language": "python"
@@ -137,7 +136,16 @@ jupyter kernelspec list
 
 ***
 
+# 2. Jupyterhub에서 Tensorflow Kernel 확인
 
+이제 Jupyterhub에 가서 Tensorflow kernel이 정상적으로 동작하는지 확인해보자.
+먼저 [New] 버튼에서 kernel 목록을 확인해보면 tensorflow kernel이 추가된 것을 볼 수 있다.
+
+![JupyterSeries2-(4)](/assets/images/2019-04-13-JupyterSeries2/3.png){: width="900" height="700"}
+
+그 다음에는 위에서 tensorflow를 테스트 했던 코드로 Jupyterhub에서 tensorflow kernel이 동작하는 것을 확인해보자.
+
+![JupyterSeries2-(5)](/assets/images/2019-04-13-JupyterSeries2/3.png){: width="900" height="700"}
 
 ***
 
