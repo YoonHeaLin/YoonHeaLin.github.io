@@ -23,32 +23,31 @@ passwd jupyter  # jupyter user 패스워드 설정
 ***
 
 # 2. Anaconda 설치
-먼저 jupyter 계정의 home 디렉토리 경로에 anaconda 디렉토리를 생성하고, 해당 경로에 ananconda를 설치하도록 한다.
-```
-mkdir /home/jupyter/anaconda
-```
 
 ## 2-1. Anaconda 설치 파일 다운로드
-Anaconda 설치 파일을 다운로드 해야 하는데, 최신 버전은 [여기서](https://repo.continuum.io/archive/) 확인할 수 있다.
 
+먼저 jupyter 계정의 home 디렉토리 경로에 anaconda 디렉토리를 생성하고, 해당 경로에 ananconda를 설치하도록 한다.
 
-위에서 ananconda 설치파일 다운로드 링크 주소를 복사해서 다음 명령으로 다운로드 하면 된다.
+Anaconda 설치 파일을 다운로드 해야 하는데, 최신 버전은 [여기서](https://repo.continuum.io/archive/) 확인할 수 있다. Ananconda 설치 파일 다운로드 링크 주소를 복사해서 다음 명령으로 다운로드 하면 된다.
 ```
+# anaconda 디렉토리 생성
+mkdir /home/jupyter/anaconda
 cd /home/jupyter/anaconda
 
+# anaconda 설치 파일 다운로그
 wget {링크 주소}
 ex) wget  https://repo.continuum.io/archive/Anaconda2-5.3.1-Linux-x86_64.sh
 ```
 
 ## 2-2. Anaconda 설치
-먼저 다운로드한 설치 파일을 실행 가능하도록 권한을 변경해줘야 한다.
+
+먼저 다운로드한 설치 파일을 실행 가능하도록 권한을 변경해줘야 한다. 그리고 설치를 진행하면 된다. 이때, 매개변수를 명령어에 추가하여 특정 디렉토리에 설치가 가능하다. 여기서는 /home/jupyter/anaconda/ 경로에 설치했다.
 ```
+# 설치 가능하도록 권한 변경
 chmod +x {설치 파일}
 ex) chmod +x Anaconda2-5.3.1-Linux-x86_64.sh
-```
 
-그리고 다음과 같이 설치를 진행하면 된다. 이때, 매개변수를 명령어에 추가하여 특정 디렉토리에 설치가 가능하다. 여기서는 /home/jupyter/anaconda/ 경로에 설치했다.
-```
+# anaconda 설치
  ./Anaconda2-5.3.1-Linux-x86_64.sh
 
 # 특정 디렉토리에 설치하고 싶으면, 다음과 같이 설치 명령어를 입력하면 된다.
@@ -66,7 +65,7 @@ export PATH=$PATH:/home/jupyter/anaconda/bin
 
 ![JupyterSeries1-(1)](/assets/images/2019-04-13-JupyterSeries1/1.png){: width="900" height="700"}
 
-마지막으로 환경 변수 변경을 적용해주면 anaconda 설치가 완료된다.
+마지막으로 설정한 환경 변수 변경을 적용해주면 anaconda 설치가 완료된다.
 ```
 # 환경 변수 적용
 source /etc/profile
@@ -141,5 +140,6 @@ http://localhost:8000 주소로 접속하면 Jupyterhub에 로그인할 수 있�
 
 ![JupyterSeries1-(2)](/assets/images/2019-04-13-JupyterSeries1/2.png){: width="900" height="700"}
 
-> PAM 로그인
->> 참고로 Jupyterhub는 기본적으로는 PAM(Pluggable Authentication Module) 로그인을 방법을 사용한다. 로그인 방법에 대해서는 추후 자세히 설명하도록 하고, Jupyterhub를 생성한 계정으로 로그인하면 된다.
+**PAM 로그인**
+
+참고로 Jupyterhub는 기본적으로는 PAM(Pluggable Authentication Module) 로그인을 방법을 사용한다. 로그인 방법에 대해서는 추후 자세히 설명하도록 하고, Jupyterhub를 생성한 계정으로 로그인하면 된다.
