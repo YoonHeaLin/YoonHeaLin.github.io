@@ -8,25 +8,18 @@ category: Python
 ---
 
 # Intro
-이번 포스트에서는 Jupyter Notebook, JupyterHub, JupyterLab 등에 가상환경 kernel을 추가하는 방법을 정리하였다. Anaconda 가상환경으로 설명하겠지만, virtualen 가상환경도 동일하게 적용 가능하다.
+이번 포스트에서는 Jupyter Notebook, JupyterHub, JupyterLab 등에 가상환경 kernel을 추가하는 방법을 정리하였다. 여기서는 Anaconda 가상환경으로 설명하겠지만, virtualen 가상환경도 동일하게 적용 가능하다.
 
-Jupyter에서 가상환경 kernel을 사용하는 이유는 각 kernel 별로 독립된 환경을 제공하기 위해서이다. 이런 방법으로 Python, R, Tensorflow 등 다양한 개발 환경을 독립적으로 분리하고, Jupyter에서 Kernel로 편리하게 사용할 수 있다.
+Jupyter에서 가상환경 kernel을 사용하는 이유는 각 kernel 별로 독립된 환경을 제공하기 위해서이다. 이런 방법으로 R, Tensorflow 등 다양한 개발 환경을 독립적으로 분리하고, Jupyter에서 Kernel로 편리하게 사용할 수 있다.
+
+가상환경 kernel을 Jupyterhub에 추가하기 위해서는 일반적으로 다음과 같은 절차가 필요하다.
+- 가상환경 생성
+- 가상환경에 개발 환경 구성(R, Tensorflow, Spark 등 가상환경 kernel의 용도에 맞게 환경 구성)
+- 가상환경을 Jupyterhub(또는 Jupyter Notebook, Jupyterlab) kernel에 추가
 
 ***
 
-# Python3 Kernel 생성
 
-가장 기본적인 Python Kernel을 추가해보자.
-
-## 1. Python3 가상환경 생성
-
-```
-# 아나콘다 가상환경 생성
-conda create -n {가상환경 명} {설치할 패키지}
-
-# 예) 가상환경 이름=Python3 + Python 3.6 버전 설치
-conda create -n Python3 python=3.6
-```
 
 ## 2. Python3 Kernel 생성
 
@@ -58,23 +51,35 @@ jupyter kernelspec list
 
 # Tensorflow Kernel 생성
 
-이번에는 Tensorflow Kernel을 추가해보자. 기본적인 내용은 Python3 Kernel 추가와 동일하며, 해당 가상환경에 Tensorflow를 설치해 줄 것이다.
+Jupyterhub에 Tensorflow 가상환경 Kernel을 추가해보자. 위에서 설명한 대로 아래와 같은 순서로 진행될 것이다.
+- 가상환경 생성(가상환경 명: Tensorflow, Python 버전: Python3)
+- 가상환경에 Tensorflow 설치
+- 가상환경을 Jupyterhub에
 
-## 1. Tensorflow 가상환경 생성
+## 1. 가상환경 생성
 
 ```
+# 아나콘다 가상환경 생성
+conda create -n {가상환경 명} {설치할 패키지}
+
+# 예) 가상환경 이름=Tensorflow + Python 3.6 버전 설치
 conda create -n Tensorflow python=3.6
+
+# 가상환경 리스트 확인
+conda info --envs
 ```
 
-## 2.Tensorflow 가상환경에 Tensorflow 설치
+## 2.가상환경에 Tensorflow 설치
 
-먼저 [https://www.tensorflow.org/install/pip](https://www.tensorflow.org/install/pip)에서 설치할 Tensorflow 패키지를 확인해보자. 설치 환경에 맞게 선택하여 패키지 경로를 복사해야 한다.
+위에서 생성한 가상환경에 Tensorflow를 설치하기 위해  [https://www.tensorflow.org/install/pip](https://www.tensorflow.org/install/pip)에서 설치할 Tensorflow 패키지를 확인해보자. 설치 환경에 맞게 선택해서 다운로드 링크를 복사해야 한다.
+
 ![Tensorflow](/assets/images/2019-03-20-Jupyter/1.PNG){: width="640" height="500"}
 
-그리고 가상환경에 설치를 진행한다.
+Tensorflow 버전에 맞게 다운로드 링크를 확인한 후에, 아래와 같이 가상환경에 Tensorflow 설치를 진행한다.
+
 ```
 # 가상환경 실행
-source activate tensorflow
+source activate Tensorflow
 
 # Tensorflow 설치
 pip install --ignore-installed --upgrade {packageURL}
@@ -88,7 +93,7 @@ pip install --upgrade numpy scipy wheel cryptography
 Tensorflow가 잘 설치되었는지 확인하기 위해, Tensorflow 가상환경에서 파이썬을 실행하고 아래 코드로 테스트 해보자.
 ```
 # 파이썬 실행
-source activate tensorflow
+source activate Tensorflow
 python
 
 # Tensorflow 테스트
