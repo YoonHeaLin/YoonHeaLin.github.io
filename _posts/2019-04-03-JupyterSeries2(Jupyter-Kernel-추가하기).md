@@ -141,11 +141,11 @@ jupyter kernelspec list
 이제 Jupyterhub에 가서 Tensorflow kernel이 정상적으로 동작하는지 확인해보자.
 먼저 [New] 버튼에서 kernel 목록을 확인해보면 tensorflow kernel이 추가된 것을 볼 수 있다.
 
-![JupyterSeries2-(4)](/assets/images/2019-04-13-JupyterSeries2/3.png){: width="900" height="700"}
+![JupyterSeries2-(4)](/assets/images/2019-04-13-JupyterSeries2/4.png){: width="900" height="700"}
 
 그 다음에는 위에서 tensorflow를 테스트 했던 코드로 Jupyterhub에서 tensorflow kernel이 동작하는 것을 확인해보자.
 
-![JupyterSeries2-(5)](/assets/images/2019-04-13-JupyterSeries2/3.png){: width="900" height="700"}
+![JupyterSeries2-(5)](/assets/images/2019-04-13-JupyterSeries2/5.png){: width="900" height="700"}
 
 ***
 
