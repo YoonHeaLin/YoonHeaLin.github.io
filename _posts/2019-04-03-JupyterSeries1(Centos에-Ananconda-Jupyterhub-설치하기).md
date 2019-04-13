@@ -129,9 +129,11 @@ jupyterhub -h
 
 이제 거의 끝났다. Jupyterhub 설정을 위해 설정 파일을 생성하고, Jupyterhub를 시작해보자.
 ```
+# Jupyterhub 설정 파일 생성
 cd /home/jupyter/
 jupyterhub --generate-config -f /home/jupyter/jupyterhub/jupyterhub_config.py <--- config 파일을 원하는 경로에 생성할 수 있다.
 
+# Jupyterhub 실행
 jupyterhub
 ```
 
@@ -140,6 +142,4 @@ http://localhost:8000 주소로 접속하면 Jupyterhub에 로그인할 수 있�
 ![JupyterSeries1-(2)](/assets/images/2019-04-13-JupyterSeries1/2.png){: width="900" height="700"}
 
 > PAM 로그인
-참고로 Jupyterhub는 기본적으로는 PAM(Pluggable Authentication Module) 로그인을 방법을 사용한다.
-로그인 방법에 대해서는 추후 자세히 설명하도록 하고,
-jupyterhub를 생성한 계정으로 로그인하면 된다.
+>> 참고로 Jupyterhub는 기본적으로는 PAM(Pluggable Authentication Module) 로그인을 방법을 사용한다. 로그인 방법에 대해서는 추후 자세히 설명하도록 하고, Jupyterhub를 생성한 계정으로 로그인하면 된다.
