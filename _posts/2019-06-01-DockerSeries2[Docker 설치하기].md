@@ -57,6 +57,8 @@ docker system df
 docker -help
 ```
 
+***
+
 # 3. Docker 사용해보기
 
 Docker가 정상적으로 동작하는지 확인하기 위해 컨테이너를 실행해보자.
@@ -125,6 +127,7 @@ docker container stats
 
 ![DockerSeries2-(1)](/assets/images/2019-06-01-DockerSeries2/1.png){: width="900" height="700"}
 
+***
 
 # 참고 사이트
 - https://niceman.tistory.com/36
