@@ -1,9 +1,9 @@
 ---
 
-title : "Docker 설치하기"
-date : 2019-06-01 10:00:00 + 0000
-tags: Docker
-category: Tool
+title : "쉘 스크립트(shell script) 사용하기"
+date : 2019-06-02 10:00:00 + 0000
+tags: Linux
+category: Language
 
 ---
 
@@ -12,7 +12,6 @@ category: Tool
 
 ***
 
-#
 # 1. Docker 설치하기
 
 ```
@@ -25,7 +24,6 @@ yum -y install docker docker-registry
 
 ***
 
-#
 # 2. Docker 실행 및 정보 확인
 
 ## 2-1. Docker 실행하기
