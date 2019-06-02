@@ -1,6 +1,6 @@
 ---
 
-title : "Mesos 이해하기"
+title : "Docker 이해하기"
 date : 2019-06-01 10:00:00 + 0000
 tags: Mesos
 category: Tool
