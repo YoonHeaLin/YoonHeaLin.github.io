@@ -12,7 +12,7 @@ category: Tool
 
 ***
 
-#
+#  
 # 1. Docker 설치하기
 
 ```
@@ -25,7 +25,7 @@ yum -y install docker docker-registry
 
 ***
 
-#
+#  
 # 2. Docker 실행 및 정보 확인
 
 ## 2-1. Docker 실행하기
