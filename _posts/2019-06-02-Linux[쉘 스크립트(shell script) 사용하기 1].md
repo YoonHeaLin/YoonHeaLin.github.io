@@ -1,6 +1,6 @@
 ---
 
-title : "쉘 스크립트(shell script) 사용하기 - 기본편"
+title : "쉘 스크립트(shell script) 사용하기 1"
 date : 2019-06-02 10:00:00 + 0000
 tags: Linux
 category: Language
