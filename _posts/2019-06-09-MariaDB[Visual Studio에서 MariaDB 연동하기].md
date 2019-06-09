@@ -12,9 +12,11 @@ category: Database
 
 ***
 
-# 1. Repositories 설정
+# 1. Visual Studio에 웹 개발 도구 설치
 
-**1) [https://downloads.mariadb.org/mariadb/repositories/](https://downloads.mariadb.org/mariadb/repositories/)에 접속한다.**
+**1) [도구] > [도구 및 기능 가져오기] > 웹 개발 다운로드 > [수정]**
+
+![MriaDB1](/assets/images/2019-06-09-MariaDB2/1.png){: width="900" height="700"}
 
 **2) 아래와 같이 버전에 맞게 선택해준다.**
 
