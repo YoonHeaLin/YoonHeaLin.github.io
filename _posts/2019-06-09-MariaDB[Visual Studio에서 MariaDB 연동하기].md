@@ -31,15 +31,15 @@ Visual Studio가 이미 설치되어 있다고 전제하고 진행하겠다. 아
 
 **3) 아래와 같이 ODBC Driver 설치를 진행한다.**
 
-![MriaDB3](/assets/images/2019-06-09-MariaDB2/3.png){: width="900" height="700"}
+![MriaDB3](/assets/images/2019-06-09-MariaDB2/3.PNG){: width="900" height="700"}
 
-![MriaDB4](/assets/images/2019-06-09-MariaDB2/4.png){: width="900" height="700"}
+![MriaDB4](/assets/images/2019-06-09-MariaDB2/4.PNG){: width="900" height="700"}
 
-![MriaDB5](/assets/images/2019-06-09-MariaDB2/5.png){: width="900" height="700"}
+![MriaDB5](/assets/images/2019-06-09-MariaDB2/5.PNG){: width="900" height="700"}
 
-![MriaDB6](/assets/images/2019-06-09-MariaDB2/6.png){: width="900" height="700"}
+![MriaDB6](/assets/images/2019-06-09-MariaDB2/6.PNG){: width="900" height="700"}
 
-**4) [제어판] > [시스템 및 보안] > [관리 도구] > [ODBC 데이터 원본] > [시스템 DNS]**
+**4) [제어판] > [시스템 및 보안] > [관리 도구] > [ODBC 데이터 원본] > [시스템 DSN]**
 
 다음과 같은 순서로 ODBC를 추가 해준다.
 
