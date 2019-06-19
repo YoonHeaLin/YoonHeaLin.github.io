@@ -14,7 +14,22 @@ category: WebServer
 
 # 1. APM(Apache, PHP, MySQL) 이란?
 
-(작성중)
+APM이란 Apache + PHP + MySQL의 줄임말로 각 구성 요소는 다음과 같은 역할을 한다.
+
+- Apache HTTP server: 웹 서비스를 제공하는 웹 서버
+- PHP: 웹 프로그래밍 언어로, 웹 페이지를 구성
+- MySQL: 데이터베이스
+
+APM의 구동 원리는 다음과 같다.
+
+![WebServer0](/assets/images/2019-06-11-WebServer1/0.jpg){: width="900" height="700"}
+
+1. Client가 웹 브라우저에 URL을 이볅하여 원하는 정보를 Server에 요청(Request)하고, Server의 Apache 프로그램이 승인한다
+2. Server는 PHP에 스크립트 실행을 요청한다.
+3. PHP는 미리 작성된 프로그램을 통해 MySQL에 쿼리를 질의한다.
+4. MySQL은 데이터베이스에 저장된 데이터를 PHP에 전송한다.
+5. PHP는 데이터베이스에서 가져온 데이터와 PHP 코드를 모두 HTML로 변환하여 Apache에게 전송한다.
+6. Apache는 완성된 HTML 파일을 Client에게 응답(Response)한다.
 
 ***
 
