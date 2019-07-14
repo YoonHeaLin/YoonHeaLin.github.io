@@ -8,152 +8,132 @@ category: Tool
 ---
 
 # Intro
-이번 포스트에서는 CentOS에 Anaconda와 Jupyterhub를 설치하는 방법을 설명하였다.
-
-https://knight76.tistory.com/entry/zookeeper-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EC%96%B4%EB%93%9C%EB%AF%BC-%ED%88%B4-%EC%84%A4%EB%AA%85-%EB%B0%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EC%BB%A4%EB%A7%A8%EB%93%9C-zktoppy-%EC%86%8C%EA%B0%9C
-
-https://urban1980.tistory.com/34
-
-https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_nc
+이번 포스트에서는 CentOS에서 Mesos를 구성하는 방법을 정리하였다.
 
 ***
 
-# 1. 사전 작업: jupyter user 계정 생성
-여기서는 Jupyterhub를 운영을 편리하게 하기 위해서 jupyter 계정을 별도로 생성한다. Jupyterhub를 구축하고 나면 userdata 디렉토리를 설정하게 되는데, 이때 jupyter 계정의 home 디렉토리의 하위 디렉토리로 설정할 것이다. 먼저 jupyter user 계정을 생성하자.
+# 1. Mesos Cluster 정보
 
-```bash
-useradd jupyter # jupyter user 생성
-passwd jupyter  # jupyter user 패스워드 설정
+여기서 구성한 Mesos Cluster 정보는 다음과 같다.
+
+Host | 역할 | 설치 애플리케이션
+--- | --- | ---
+Mesos01 | Master | Mesos-Master, Zookeeper, Marathon, Docker
+Mesos02 | Master | Mesos-Master, Zookeeper, Marathon, Docker
+Mesos03 | Master | Mesos-Master, Zookeeper, Marathon, Docker
+Mesos04 | Slave | Mesos-Slave, Docker
+Mesos05 | Slave | Mesos-Slave, Docker
+Mesos06 | Slave | Mesos-Slave, Docker
+Mesos07 | Slave | Mesos-Slave, Docker
+
+이제 Mesos Cluster를 구축하기 위해 각 서버에 애플리케이션을 설치하고 설정해보자.
+
+***
+
+# 2. Mesos Cluster 구축 사전 작업
+
+## 2-1. Hostname 등록하기
+
+먼저 모든 서버의 `/etc/hosts` 파일에 hostname을 등록해야 한다. 모든 서버에서 아래와 같이 설정 작업을 하자.
+
+```
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# Mesos Cluster
+{Server IP}  Mesos01
+{Server IP}  Mesos02
+{Server IP}  Mesos03
+{Server IP}  Mesos04
+{Server IP}  Mesos05
+{Server IP}  Mesos06
+{Server IP}  Mesos07
+```
+
+## 2-2. Java 설치
+
+Zookeeper를 사용하기 위해서는 Java가 설치되어 있어야 한다. Zookeeper 사용을 위해서는 Master에만 설치해도 되지만 Java는 다양하게 사용되므로 Slave에도 설치하도록 하자.
+
+모든 서버에서 아래의 명령어를 통해 Java를 설치하자.
+
+```
+# Java가 설치되어 있는지 확인
+java -version
+javac -version
+
+# Java 설치
+yum list java*jdk-devel
+yum install -y java-1.8.0-openjdk-devel.x86_64
+rpm -qa | grep java
+```
+
+## 2-3. Docker 설치
+
+모든 서버에서 아래의 명령어를 통해 Docker 설치 및 설정을 진행하자.
+
+```
+(작성중)
+```
+
+## 2-4. Mesos 저장소 설치
+
+다음으로 모든 서버에 Mesos 저장소를 설치해주어야 한다. 최신 버전은 여기(작성중)에서 확인할 수 있다.
+모든 서버에서 아래의 명령어를 수행하여 저장소를 설치하자.
+
+```
+rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+(작성중)
 ```
 
 ***
 
-# 2. Anaconda 설치
+# 3. Mesos Cluster 구축하기
 
-## 2-1. Anaconda 설치 파일 다운로드
+이제 본격적으로 각 서버에 Mesos를 구성할 것이다. 설치와 설정해야 하는 것이 많으므로 누락되는 것이 없도록 주의해야 한다.
 
-먼저 jupyter 계정의 home 디렉토리 경로에 anaconda 디렉토리를 생성하고, 해당 경로에 ananconda를 설치하도록 한다.
+또한 Mesos를 실행하는 순서도 중요하므로, 아래의 순서대로 작업을 수행하는 것을 권장한다.
 
-Anaconda 설치 파일을 다운로드 해야 하는데, 최신 버전은 [여기서](https://repo.continuum.io/archive/) 확인할 수 있다. Ananconda 설치 파일 다운로드 링크 주소를 복사해서 다음 명령으로 다운로드 하면 된다.
+**Mesos01 서버에서 작업(Master)**
+```
+# 1. Mesos Master 설치
+yum -y install mesos
+
+# 2. Mesos Master 설정
+echo {해당 마스터 노드의 IP주소} > /etc/mesos-master/ip
+
+echo {해당 마스터 노드의 IP주소} > /etc/mesos-master/hostname
+
+# 3. Zookeeper 설치
+yum -y install mesosphere-zookeeper
+
+# 4. Zookkeper 설정
+echo 1 > /var/lib/zookeeper/myid
+
+vi /etc/zookeeper/conf/zoo.cfg --> 아래 내용 추가
+server.1={mesos01의 IP 주소}:2888:3888  
+server.2={mesos02의 IP 주소}:2888:3888
+server.3={mesos03의 IP 주소}:2888:3888
+
+echo 'zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181 /mesos' > /etc/mesos/zk
+
+echo 2 > /etc/mesos-master/quorum
+
+# 5. Marathon 설치
+sudo mkdir -p /etc/marathon/conf
+sudo cp /etc/mesos-master/hostname /etc/marathon/conf
+
+sudo cp /etc/mesos/zk /etc/marathon/conf/master  
+sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk
+
+sudo vi /etc/marathon/conf/zk  
+zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/marathon  
+
+
+# 6. Marathon 설정
+
+# 7. 서비스 실행
 
 ```
-# anaconda 디렉토리 생성
-mkdir /home/jupyter/anaconda
-cd /home/jupyter/anaconda
 
-# anaconda 설치 파일 다운로그
-wget {링크 주소}
-ex) wget  https://repo.continuum.io/archive/Anaconda2-5.3.1-Linux-x86_64.sh
-```
-
-## 2-2. Anaconda 설치
-
-먼저 다운로드한 설치 파일을 실행 가능하도록 권한을 변경해줘야 한다. 그리고 설치를 진행하면 된다. 이때, 매개변수를 명령어에 추가하여 특정 디렉토리에 설치가 가능하다. 여기서는 /home/jupyter/anaconda/ 경로에 설치했다.
-
-```
-# 설치 가능하도록 권한 변경
-chmod +x {설치 파일}
-ex) chmod +x Anaconda2-5.3.1-Linux-x86_64.sh
-
-# anaconda 설치
- ./Anaconda2-5.3.1-Linux-x86_64.sh
-
-# 특정 디렉토리에 설치하고 싶으면, 다음과 같이 설치 명령어를 입력하면 된다.
-./{설치 파일} -b -p {경로} -f
-ex) ./Anaconda2-5.3.1-Linux-x86_64.sh -b -p /home/jupyter/anaconda -f
-```
-
-마지막으로 anaconda 사용을 위해 환경 변수를 설정해줘야 한다. /etc/profile 파일을 열어서 해당 path를 추가하자.
-
-```
-vi /etc/profile
-
-# 아래의 PATH 추가
-export PATH=$PATH:/home/jupyter/anaconda/bin
-```
 
 ![JupyterSeries1-(1)](/assets/images/2019-04-13-JupyterSeries1/1.png){: width="900" height="700"}
-
-그리고 설정한 환경 변수 변경을 적용해주면 anaconda 설치가 완료된다.
-
-```
-# 환경 변수 적용
-source /etc/profile
-```
-
-***
-
-# 3. Jupytehub 설치
-Jupyterhub를 독립적인 환경에서 구축하기 위해서, conda 가상환경을 만들고 그 위에 Jupyterhub를 설치하는 방법을 설명한다(conda 가상환경 위에 Jupyterhub를 설치하는 것 외에는 기존의 Jupyterhub 설치 방법과 동일하다).
-
-## 3-1. Python3 가상환경 생성
-conda 가상환경을 생성하고 실행 및 중지하는 방법을 알아보자.
-
-```
-# 가상환경 생성하기
-conda create -n {가상환경 명} python={파이썬 버전} anaconda
-ex) conda create -n jupyterhub python=3.6 anaconda
-
-# 가상환경 실행하기
-source activate {가상환경 명}
-ex) source activate jupyterhub
-
-# 가상환경 나가기
-source deactivate
-```
-
-생성된 가상환경의 목록은 아래의 명령어로 조회할 수 있다. Jupyterhub 가상환경이 생성된 것을 확인해보자.
-
-```
-# 가상환경 리스트 확인
-conda info --envs
-```
-
-## 3-2. Npm, Node js, Proxy 설치
-Jupyterhub를 설치하기 위해서는 npm, node js, configurable http proxy 설치가 필요하다.
-아래의 명령어를 차례로 입력하여 설치를 진행하면 된다.
-
-```
-# 설치
-curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
-sudo yum install nodejs
-
-# 버전 확인
-node --version
-npm --version
-
-# configurable http proxy 설치
-sudo npm install -g configurable-http-proxy
-```
-
-## 3-3. Jupyterhub 설치 및 시작
-Jupyterhub를 설치하는 명령은 간단하다.
-
-```
-# 먼저 Jupyterhub 가상환경에 들어가서
-source activate jupyterhub
-
-# pip로 설치해주면 끝!
-pip install jupyterhub
-
-# JUpyterhub 설치 확인
-jupyterhub -h
-```
-
-이제 거의 끝났다. Jupyterhub 설정을 위해 설정 파일을 생성하고, Jupyterhub를 시작해보자.
-
-```
-# Jupyterhub 설정 파일 생성
-cd /home/jupyter/
-jupyterhub --generate-config -f /home/jupyter/jupyterhub/jupyterhub_config.py <--- config 파일을 원하는 경로에 생성할 수 있다.
-
-# Jupyterhub 실행
-jupyterhub
-```
-
-http://localhost:8000 주소로 접속하면 Jupyterhub에 로그인할 수 있다.
-
-![JupyterSeries1-(2)](/assets/images/2019-04-13-JupyterSeries1/2.png){: width="900" height="700"}
-
-**PAM 로그인**
-참고로 Jupyterhub는 기본적으로는 PAM(Pluggable Authentication Module) 로그인을 방법을 사용한다. 로그인 방법에 대해서는 추후 자세히 설명하도록 하고, Jupyterhub를 생성한 계정으로 로그인하면 된다.
