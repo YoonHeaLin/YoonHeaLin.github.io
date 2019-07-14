@@ -72,7 +72,20 @@ rpm -qa | grep java
 모든 서버에서 아래의 명령어를 통해 Docker 설치 및 설정을 진행하자.
 
 ```
-(작성중)
+# yum 패키지 업데이트
+yum update
+
+# docker, docker registry 설치
+yum -y install docker docker-registry
+
+# 시스템 부팅 시 docker를 시작하도록 설정
+systemctl enable docker.service
+
+# Docker 실행
+systemctl start docker.service
+
+# Docker 상태 확인
+systemctl status docker.service
 ```
 
 ## 2-4. Mesos 저장소 설치
@@ -82,20 +95,20 @@ rpm -qa | grep java
 
 ```
 rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
-(작성중)
 ```
 
 ***
 
-# 3. Mesos Cluster 구축하기
+# 3. Mesos Cluster 구축
 
 이제 본격적으로 각 서버에 Mesos를 구성할 것이다. 설치와 설정해야 하는 것이 많으므로 누락되는 것이 없도록 주의해야 한다.
 
 또한 Mesos를 실행하는 순서도 중요하므로, 아래의 순서대로 작업을 수행하는 것을 권장한다.
 
-**Mesos01 서버에서 작업(Master)**
+## 3-1. Mesos01~Mesos03 서버에서 작업(Master)
+
 ```
-# 1. Mesos Master 설치
+# 1. Mesos 패키지 설치
 yum -y install mesos
 
 # 2. Mesos Master 설정
@@ -119,21 +132,77 @@ echo 'zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 I
 echo 2 > /etc/mesos-master/quorum
 
 # 5. Marathon 설치
+yum -y install marathon
+
+# 6. Marathon 설정
 sudo mkdir -p /etc/marathon/conf
 sudo cp /etc/mesos-master/hostname /etc/marathon/conf
 
 sudo cp /etc/mesos/zk /etc/marathon/conf/master  
 sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk
 
-sudo vi /etc/marathon/conf/zk  
-zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/marathon  
+echo 'zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/marathon' > /etc/marathon/conf/zk
 
-
-# 6. Marathon 설정
-
-# 7. 서비스 실행
-
+vi /etc/default/marathon --> 아래 내용 추가
+MARATHON_MASTER="zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/mesos"
+MARATHON_ZK="zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/marathon"
 ```
 
+## 3-2. Mesos04~Mesos07 서버에서 작업(Slave)
 
-![JupyterSeries1-(1)](/assets/images/2019-04-13-JupyterSeries1/1.png){: width="900" height="700"}
+```
+# 1. Mesos 패키지 설치
+yum -y install mesos
+
+# 2. Mesos Slave 설정
+echo {해당 슬레이브 노드의 IP주소} > /etc/mesos-slave/ip
+
+echo {해당 슬레이브 노드의 IP주소} > /etc/mesos-slave/hostname
+```
+
+***
+
+# 4. Mesos Cluster 시작
+
+## 4-1. Mesos 서비스 실행(순서대로 하는 것이 중요)
+
+```
+# Mesos01 서버에서
+systemctl start mesos-master
+systemctl start zookeeper
+systemctl start marathon
+
+# Mesos02 서버에서
+systemctl start mesos-master
+systemctl start zookeeper
+systemctl start marathon
+
+# Mesos03 서버에서
+systemctl start mesos-master
+systemctl start zookeeper
+systemctl start marathon
+
+# Mesos04~07 서버에서
+systemctl start mesos-slave
+```
+
+## 4-2. Mesos 서비스 동작 확인
+
+```
+# Master 서버에서 mesos-master 서비스 동작 확인
+systemctl status mesos-master
+systemctl status zookeeper
+
+# Master 서버에서 zookeeper leader/follower 여부 확인
+echo srvr | nc localhost 2181
+
+# Slave 서버에서 mesos-slave 서비스 동작 확인
+systemctl status mesos-slave
+```
+
+## 4-3. 웹 접속
+
+드디어 Mesos 구성이 끝났다. 아래의 웹 페이지에 접속해서 Mesos 동작을 확인할 수 있다.
+
+- Mesos 웹 페이지: http://{Master IP}:5050
+- Marathon 웹 페이지: http://{Master IP}:8080
