@@ -194,6 +194,8 @@ $ /opt/sonarqube/bin/linux-x86-64/sonar.sh start
 - 계정: admin
 - 패스워드: admin
 
+![SonarQube1](/assets/images/2019-10-31-Centos7에-SonarQube-설치하기/1.PNG){: width="900" height="700"}
+
 ***
 
 # 5. SonarQube 백업 및 복원
