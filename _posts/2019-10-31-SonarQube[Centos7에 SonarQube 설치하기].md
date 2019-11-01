@@ -106,9 +106,9 @@ postgres=# \password postgres
 
 ## 3-2. PostgreSQL 사용자, 데이터베이스 생성
 ```
-postgres=# create user sonar password '{패스워드}!' CreateDB Replication Superuser Createrole;
-postgres=# create database sonar owner=sonar;
-postgres=# grant all privileges on database sonar to sonar;
+postgres=# create user {계정} password '{패스워드}!' CreateDB Replication Superuser Createrole;
+postgres=# create database {데이터베이스 명} owner={계정};
+postgres=# grant all privileges on database {데이터베이스 명} to {계정};
 ```
 
 ## 3-3. PostgreSQL10 외부 접속 허용
@@ -141,7 +141,7 @@ $ systemctl status postgresql-10.service
 
 아래와 같이 접속이 되는 것을 확인 할 수 있다.
 ```
-$ psql --username=sonar --host=52.141.3.213 --port=5432
+$ psql --username=sonar --host={PostgreSQL Server IP} --port={PostgreSQL PORT}
 Password for user sonar:
 psql (10.10)
 Type "help" for help.
@@ -154,9 +154,80 @@ sonar=#
 
 # 4. SonarQube 설치
 
+## 4-1. SonarQube 다운로드
+```
+$ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
+$ unzip sonarqube-7.9.1.zip
+$ mv sonarqube-7.9.1 /opt/sonarqube
+```
+
+## 4-2. SonarQube 설정
+```
+$ vi /opt/sonarqube/conf/sonar.properties
+
+아래 내용 수정
+sonar.jdbc.username={PostgreSQL 계정}
+sonar.jdbc.password={PostgreSQL 패스워드}
+sonar.jdbc.url=jdbc:postgresql://{PostgreSQL Server IP}:{PostgreSQL PORT}/{데이터베이스 명}
+
+sonar.web.host={SonarQube Server IP}
+sonar.web.port={SonarQube PORT}
+```
+
+## 4-3. SonarQube 폴더 권한 설정
+```
+$ setfacl -R -m m::rwx /opt/sonarqube
+$ setfacl -R -m u:sonarqube:rwx /opt/sonarqube
+$ setfacl -R -m default:u:sonarqube:rwx /opt/sonarqube
+```
+
+## 4-4. SonarQube 실행
+```
+elasticsearch가 함께 실행되므로, sonarqube 계정으로 실행해야 한다
+$ su - sonarqube
+$ /opt/sonarqube/bin/linux-x86-64/sonar.sh start
+```
+
+## 4-5. SonarQube 접속
+
+- 주소: http://{SonarQube Server IP}:{SonarQube PORT}
+- 계정: admin
+- 패스워드: admin
+
+***
+
+# 5. SonarQube 백업 및 복원
+
+## 5-1. SonarQube 백업
+```
+SonarQube 중지
+$ /opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+
+데이터 베이스 백업
+$ pg_dumpall -c -U postgres > {dump 파일명}.sql
+
+SonarQube 디렉토리 압축
+$ zip -r sonarqube.zip /opt/sonarqube
+```
+
+## 5-2. SonarQube 복원
+
+복원하려는 서버에서 진행하면 된다.
+```
+데이터 베이스 복원
+$ cat {dump 파일명}.sql | psql -U postgres
+
+SonarQube 디렉토리 복원
+$ unzip sonarqube.zip
+
+SonarQube 시작
+$ /opt/sonarqube/bin/linux-x86-64/sonar.sh start
+```
+
 ***
 
 # 참고 사이트
 - https://xshine.tistory.com/308
 - https://futurecreator.github.io/2018/11/16/docker-container-basics/
 - http://pyrasis.com/Docker/Docker-HOWTO
+- http://www.scmgalaxy.com/tutorials/sonarqube-upgrade-backup-and-restore-process/
