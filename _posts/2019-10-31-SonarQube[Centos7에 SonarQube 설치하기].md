@@ -3,7 +3,7 @@
 title : "Centos7에 SonarQube 설치하기"
 date : 2019-10-31 10:00:00 + 0000
 tags: SonarQube
-category: SonarQube
+category: TestAutomation
 
 ---
 
