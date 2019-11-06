@@ -1,0 +1,258 @@
+Ansible 변수
+1. 무엇을 위해 변수를 사용할 것인가
+	* 환경에 따라 값을 다르게 사용하는데 사용 --> 플레이북의 범용성 향상
+		* 종류
+			* 사람이 정한 "보통 변수"
+			* 호스트가 상태에 따라 자동으로 값을 설정하는 "Facts"
+		* 코드를 변경하지 않고 다양한 환경에서 플레이북 사용 가능	
+
+	* 반복해서 나오는 값의 정의를 정리하는데 사용 --> 플레이북의 유지 보수성 향상
+		* 파일 경로가 반복해서 나오는 경우 등에 유효
+		* 입력 실수 방지 및 재사용성
+
+2. 변수 정의 방법
+	* 4가지 방법 有
+		* 모듈이 자동으로 정의
+		* 인벤터리(그룹/호스트) 레벨에서 정의 
+		* 앤서블이 실행될 때 정의
+		* 플레이북에서 정의
+	
+	* 앤서블이 실행할 때 변수 정의
+		* --extra-vars(생락형 -e) 옵션 사용 
+		* 예시1: ansible-playbook -i hosts -e 'nginx_version=1.10.2 nginx_user=nginx' site.yml
+		* 예시2: ansible-playbook -i hosts -e '{"nginx_port":8080}' site.yml
+		* 예시3: ansible-playbook -i hosts -e '@extra-vars.yml' stie.yml
+	* 플레이북에서 변수를 정의
+		* vars 지시자로 직접 정의: 외부에서 값을 바꾸기 보다는 값을 재사용하거나 변수를 수정해 새로운 변수로 정의할 때 좋음
+			* 예시
+			```
+			---
+			- name: 포트 번호를 사용하는 플레이
+			  hosts: all
+			  vars:
+			    nginx_http_port: 80
+				mysql_port: 3306
+			```
+			* vars에서 정의한 변수는 해당 플레이, 테스크에서만 유효
+		* 외부 파일에서 변수 읽어 들이기 - vars_files 지시자
+			* YAML 파일의 경로를 다음과 같이 여러불로 지정하면 한꺼번에 읽어들임
+			* 예시
+			```
+			vars_files:
+			  - some_vars.yml
+			  - another_v ars.yml
+			```
+
+
+
+진자2를 이용한 변수 확장
+1. 변수 활용 방법
+	* 동작 예시
+		* 코드
+		```
+		---
+		- name: 변수의 동작을 확인
+		  hosts: localhost
+		  vars:
+			my_var: jung
+		  tasks:
+			- name: my_var 값을 디버깅으로 확인
+			  debug:
+				msg: "변수 my_var 값은 {{my_var}} 이다"
+			```
+		* 실행
+		$ ansible-playbook debug-var.yml
+		
+		* {{,}}로 변수를 묶으면 변수가 값으로 변경되는 것이 앤서블에서 진자2를 사용하는 가장 기본적이로 중요한 방법
+		* 변수가 나올 때마다 반드시 큰 따움표로 변수를 묶는다
+		
+	* 계층 구조로 된 데이터
+		* 코드
+		```
+		admin_user:
+		  name: suji
+		  uid: 1001
+		```
+		
+		* .(도트)로 연결
+		$ 사용자 이름 {{admin_user.name}}의 UID는 {{admin_user.uid}} 입니다.
+		
+		* []로 연결
+		$ admin_user['name']
+
+2. 진자2의 여러가지 기능
+	* 조건 분기 if
+		* 예시
+		```
+		{% if ansible_os_family == 'RedHat' %}
+		이 서버는 레드헷 계열이다
+		{% elif ansible_os_family == 'Debian' %}
+		이 서버는 데비안 계열이다
+		{% else %}
+		이 서버는 레드헷 계열도 데비안 계열도 아니다
+		{% endif %}
+		```
+		
+		* 주요 조건 비교
+			* != 값이 같지 않을 때 참
+			* >, >=, <=, < "초과", "이상", "이하", "미만"일 때 참
+			* not 조건의 부정
+			* and, or "그리고", "또는"
+			* in 값이 포함된 경우에 참(숫자, 문자)
+			* is defined 변수가 정의된 경우 참
+	
+	* 반복 for
+		* 예시
+		```
+		admin_user:
+		  - name: suji
+		    uid: 1001
+		  - name: jiseong
+		    uid: 1002
+		  - name: jia
+		    uid: 1003
+		```
+		* 출력
+		{% for user in admin_user %}
+		사용자 이름 {{user.name}}의 UID는 {{user.uid}} 입니다.
+		{% endfor %}
+		
+		* 응용 출력
+		{% for user in admin_user if user.name == 'suji' %}
+		
+		--> admin_user에 포함된 사용자 중에 name이 suji인 경우만 반복된다.
+		
+		* 반복 정보
+			* loop.lndex 1부터 시작한 현재의 반복 횟수(index0이면 0으로 시작)
+			* loop.revindex 뒤에서부터 센 반복 횟수, 1부터 시작. revindex0도 사용 가능
+			* loop.first 반복의 첫번째 요소인 경우 True
+			* loop.last 반복의 마지막 요소인 경우 True
+	
+	* 필터로 값을 처리
+		* 예시
+		```
+		{{ 'SAMPLE STRING' | lower }}
+		```
+
+플레이북에서의 태스크 실행 제어와 지시자
+1. 태스크 실행 결과를 변수로 저장 - register
+	* 예시: command 모듈에서 /etc/passwd 파일을 읽어들여 사용자 이름의 목록을 얻는 플레이북
+	```
+	- name: 호스트의 사용자 목록을 얻는다
+	  hosts: all
+	  tasks: 
+	    - name: /etc/passwd에서 사용자 이름 추출
+		  command: cut --delimiter=':' --fields=1 /etc/passwd 
+		  register: usernames_result
+		- name: usernames_result 변수를 디버깅으로 표시
+		  debug:
+			var: usernames_result
+	```
+	
+	* 실행
+	$ ansible-playbook -i hosts get-users.yml
+	
+	* 모듈 간에 공통된 항목
+		* changed: 변경 계열을 처리할 경우는 true, 그렇지 않으면 false
+		* start: 태스크 실행 시작 시각을 UTC로 입력
+		* end: 태스크 실행 종료 시각
+		* delta: 태스크 실행 시간. end-start
+		* warnings: 모듈이 경고를 출력하면 여기에 입력. 자동으로 실행된 로그 중에 경고문이 출력
+		
+	* command 모듈 고유의 항목
+		* cmd: 실행한 명령 문자열을 띄어쓰기로 구분한 목록
+		* rc: 명령 실행의 반환 코드, 일반적으로 성공했을 경우 0, 그 외에는 에러
+		* stderr: 명령의 표준 에러
+		* stdout: 명령의 표준 출력
+		* stdout_lines: 표준 풀력을 행 단위로 구분한 목록
+	
+	* 각 모듈의 실행 결과를 확인하는 방법
+		* register 지시자를 사용하려면 각 모듈의 실행 결과 형식을 미리 확인해둬야 한다. 모듈을 학인하는 가장 쉬운 방법은 사용자가 모듈을 실행해 내용을 확인하는 것이다.
+		* 모듈을 실행한 결과를 확인하기 위한 대표적인 방법
+			* debug
+			* ansible 명령에서 모듈을 직접 실행
+			* ansible-playbook 명령에 -v 옵션을 붙여 verbose 모드로 실행
+
+2. 태스크에 조건을 추가해서 실행 - when
+	* 예시
+	```
+	- name: 호스트의 사용자 목록을 얻는다
+	  hosts: all
+	  tasks: 
+	    - name: /etc/passwd에서 사용자 이름 추출
+		  command: cut --delimiter=':' --fields=1 /etc/passwd 
+		  register: usernames_result
+		- name: usernames_result 변수를 디버깅으로 표시
+		  debug:
+			var: usernames_result
+	- name: 명령을 실행한 결과에서 존재하는 사용자 이름을 목록으로 생성
+	  set_fact:
+	    usernames_list: "{{ usernames_result.stdout_lines}}"
+	- name: vargent 사용자가 있으면 메시지를 출력
+	  debug:
+	    msg: 이 서버에는 vargent 사용자가 존재합나디.
+	  when: "'vargent' in usernames_list"
+	```
+	
+	* 태스크의 실행 결과 상태를 조건으로 설정: 다음과 같은 필터 有
+		* succeeded/success
+		* changed/change
+		* failed/fail
+		* skipped/skip 
+		
+3. with_items를 사용한 태스크의 반복
+	* 예시: 사용자 목록이 올바른가를 user 모듈을 실행해서 확인. user 모듈은 필수 인수 name에 사용자 이름을 넣어야 하므로 usernames_list를 반복해서 name에 사용자 이름 대입
+	```
+	- name: 호스트의 사용자 목록을 얻는다
+	  hosts: all
+	  tasks: 
+	    - name: /etc/passwd에서 사용자 이름 추출
+		  command: cut --delimiter=':' --fields=1 /etc/passwd 
+		  register: usernames_result
+		- name: usernames_result 변수를 디버깅으로 표시
+		  debug:
+			var: usernames_result
+	- name: 명령을 실행한 결과에서 존재하는 사용자 이름을 목록으로 생성
+	  set_fact:
+	    usernames_list: "{{ usernames_result.stdout_lines}}"
+	- name: vargent 사용자가 있으면 메시지를 출력
+	  debug:
+	    msg: 이 서버에는 vargent 사용자가 존재합나디.
+	  when: "'vargent' in usernames_list"
+	- name: 모든 사용자가 있는지 확인
+	  user: 
+	    name: "{{item}}"
+		createhome: false
+	  with_items: "{{usernames_list}}"
+	```
+	
+	* 예시: 다음과 같이 목록을 직접 지정도 가능
+	```
+	- name: yum으로 의존 패키지를 설치
+	  yum: 
+	    name: "{{item}}"
+	  with_items:
+	    - gcc
+		- make
+	```
+	
+	* 예시: 여러 목록을 묶어서 반복도 가능
+	아래와 같이 패키지 목록이 2개의 변수로 나뉘어 있다고 가정
+	```
+	development_packages:
+	  - gcc
+	  - make
+	openssl_packages:
+	  - openssl 
+	  - openssl-devel
+	```
+	
+	```
+	- name: yum으로 의존 패키지를 설치
+	  yum: 
+	    name: "{{item}}"
+	  with_items:
+	    - "{{development_packages}}"
+		- "{{openssl_packages}}"
+	```
+
