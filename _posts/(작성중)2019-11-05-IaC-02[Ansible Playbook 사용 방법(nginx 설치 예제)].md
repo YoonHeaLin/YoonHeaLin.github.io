@@ -1,7 +1,7 @@
 ---
 
-title : "Ansible 예제 - 호스트 사용자 목록"
-date : 2019-11-06 10:00:00 + 0000
+title : "Ansible 예제 - nginx 설치하기"
+date : 2019-11-05 10:00:00 + 0000
 tags: Ansible
 category: IaC
 
@@ -9,7 +9,7 @@ category: IaC
 
 # Intro
 
-이번 포스트에서는 호스트 사용자 목록을 Ansible을 통해 다루는 예제를 정리하였다.
+이번 포스터에서는 Ansible Playbook 작성 방법을 정리하였다.
 
 ***
 
