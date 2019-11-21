@@ -33,6 +33,32 @@ $ ulimit -n 65536
 $ ulimit -u 4096
 ```
 
+- 영구적으로 설정하는 방법(sysctl)
+```
+$ vi /etc/sysctl.conf
+
+아래 내용 추가
+vm.max_map_count=262144
+fs.file-max=65536
+
+확인
+$ sysctl -p
+```
+
+- 영구적으로 설정하는 방법(ulmit)
+```
+$ vi /etc/security/limits.conf
+
+아래 내용 추가
+*               soft    nofile          65536
+*               hard    nofile          65536
+
+확인
+$ ulimit -a
+$ ulimit -aH
+```
+
+
 ## 1-3. Sonarqube 계정 생성
 ```
 $ adduser sonarqube
@@ -87,7 +113,8 @@ $ echo $JAVA_HOME
 # PostgreSQL repository 설치
 $ rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 
-# PostgresQL 설치 $ yum install postgresql10-server postgresql10
+# PostgresQL 설치
+$ yum install postgresql10-server postgresql10
 
 # PostgreSQL DB 초기화
 $ /usr/pgsql-10/bin/postgresql-10-setup initdb
@@ -106,7 +133,7 @@ postgres=# \password postgres
 
 ## 3-2. PostgreSQL 사용자, 데이터베이스 생성
 ```
-postgres=# create user {계정} password '{패스워드}!' CreateDB Replication Superuser Createrole;
+postgres=# create user {계정} password '{패스워드}' CreateDB Replication Superuser Createrole;
 postgres=# create database {데이터베이스 명} owner={계정};
 postgres=# grant all privileges on database {데이터베이스 명} to {계정};
 ```
@@ -123,7 +150,7 @@ listen_addresses = '*'
 
 다음으로 postgresql의 인증시스템 관련 정보 파일인 pg_hba.conf 파일을 수정한다.
 ```
-$ vi /var/lib/pgsql/data/pg_hba.conf
+$ vi /var/lib/pgsql/10/data/pg_hba.conf
 
 아래 내용 추가
 # TYPE    DATABASE        USER        ADDRESS        METHOD
