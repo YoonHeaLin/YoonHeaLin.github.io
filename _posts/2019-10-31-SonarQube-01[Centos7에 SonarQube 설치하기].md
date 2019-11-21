@@ -33,7 +33,7 @@ $ ulimit -n 65536
 $ ulimit -u 4096
 ```
 
-- 영구적으로 설정하는 방법(sysctl)
+#### 영구적으로 설정하는 방법(sysctl)
 ```
 $ vi /etc/sysctl.conf
 
@@ -45,7 +45,7 @@ fs.file-max=65536
 $ sysctl -p
 ```
 
-- 영구적으로 설정하는 방법(ulmit)
+####  영구적으로 설정하는 방법(ulmit)
 ```
 $ vi /etc/security/limits.conf
 
