@@ -39,6 +39,8 @@ $ systemctl restart mesos-slave
 $ systemctl status mesos-slave
 ```
 
+정상적으로 작동하는 것을 확인할 수 있음
+
 ### 참고 사이트
 -  https://gist.github.com/lava/bd9b7c90c067ae3298f7daf2df9fd99f
 
