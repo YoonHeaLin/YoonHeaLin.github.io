@@ -136,11 +136,11 @@ yum -y install marathon
 
 # 6. Marathon 설정
 sudo mkdir -p /etc/marathon/conf
-sudo cp /etc/mesos-master/hostname /etc/marathon/conf
+sudo cp /etc/mesos-master/hostname /etc/marathon/conf/hostname
 
 sudo cp /etc/mesos/zk /etc/marathon/conf/master  
-sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk
 
+touch /etc/marathon/conf/zk
 echo 'zk://{mesos01의 IP 주소}:2181,{mesos02의 IP 주소}:2181,{mesos03의 IP 주소}:2181/marathon' > /etc/marathon/conf/zk
 
 vi /etc/default/marathon --> 아래 내용 추가
